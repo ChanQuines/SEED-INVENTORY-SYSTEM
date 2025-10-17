@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SEED INVENTORY SYSTEM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SEED INVENTORY</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/add">Add Seed</a></li>
+            <li><a href="/report">Reports</a></li>
+            <li><a href="/status">Status</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Welcome to the Seed Inventory System</h1>
+        <p>Manage your seeds efficiently — track stock, suppliers, and availability.</p>
+        <div class="buttons">
+            <a href="/add" class="btn"> Add Seed</a>
+            <a href="/report" class="btn btn-secondary"> View Inventory</a>
+            <a href="/status" class="btn btn-warning"> Status Overview</a>
+        </div>
+    </div>
+</body>
+</html>

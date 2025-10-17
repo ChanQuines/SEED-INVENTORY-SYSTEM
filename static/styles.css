@@ -1,0 +1,75 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f3f6f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #2d6a4f;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #b7e4c7;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container { width: 95%; margin: 20px auto; }
+    .nav-links { flex-direction: column; gap: 15px; }
+}
+
+.btn, .btn-small {
+    text-decoration: none;
+    background-color: #40916c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn:hover, .btn-small:hover {
+    background-color: #52b788;
+}
+
+.delete { background-color: #d62828; }
+
+.btn-warning { background-color: #f4a261; }
+.btn-warning:hover { background-color: #e76f51; }
+
+.table-responsive { overflow-x: auto; }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td { padding: 10px; border: 1px solid #ddd; }
+th { background: #2d6a4f; color: white; }
+
+.status-available { color: green; font-weight: bold; }
+.status-low { color: orange; font-weight: bold; }
+.status-expired { color: red; font-weight: bold; }

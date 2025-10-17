@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Seed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"> SEED INVENTORY </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/add">Add Seed</a></li>
+            <li><a href="/report">Reports</a></li>
+            <li><a href="/status">Status</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Add New Seed</h1>
+        <form method="POST" action="/add" class="form">
+            <input type="text" name="seed_name" placeholder="Seed Name" required>
+            <input type="text" name="seed_type" placeholder="Seed Type" required>
+            <input type="number" name="quantity" placeholder="Quantity" required min="0">
+            <input type="text" name="supplier" placeholder="Supplier" required>
+            <label for="status">Seed Status:</label>
+            <select name="status" id="status" required>
+                <option value="Available"> Available</option>
+                <option value="Low Stock"> Low Stock</option>
+                <option value="Expired"> Expired</option>
+            </select>
+            <button type="submit" class="btn">Add Seed</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> SEED INVENTORY REPORT </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Seed Inventory Report</h1>
+        <div class="table-responsive">
+        <table>
+            <tr>
+                <th>Seed ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Supplier</th>
+                <th>Status</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            {% for seed in seeds %}
+            <tr>
+                <td>{{ seed.seed_id }}</td>
+                <td>{{ seed.seed_name }}</td>
+                <td>{{ seed.seed_type }}</td>
+                <td>{{ seed.quantity }}</td>
+                <td>{{ seed.supplier }}</td>
+                <td>{{ seed.status }}</td>
+                <td>{{ seed.date_added.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <a href="/update/{{ seed.id }}" class="btn-small">Edit</a>
+                    <a href="/delete/{{ seed.id }}" class="btn-small delete" onclick="return confirm('Are you sure?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+        <a href="/">⬅ Back to Home</a>
+    </div>
+</body>
+</html>

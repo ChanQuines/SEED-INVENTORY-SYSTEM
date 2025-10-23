@@ -2,26 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SEED INVENTORY SYSTEM</title>
+    <title>Seed Inventory System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">SEED INVENTORY</div>
+        <div class="logo">🌱 Seed Inventory</div>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
-            <li><a href="/add">Add Seed</a></li>
+            {% if session.get('logged_in') %}
+                <li><a href="/add">Add Seed</a></li>
+            {% endif %}
             <li><a href="/report">Reports</a></li>
             <li><a href="/status">Status</a></li>
+            {% if session.get('logged_in') %}
+                <li><a href="/logout" class="logout">Logout</a></li>
+            {% else %}
+                <li><a href="/login" class="login">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
+
     <div class="container">
-        <h1>Welcome to the Seed Inventory System</h1>
-        <p>Manage your seeds efficiently — track stock, suppliers, and availability.</p>
+        <h1>Welcome to the <span class="highlight">Seed Inventory System</span></h1>
+        <p class="subtitle">Efficiently track your seeds — manage stock, suppliers, and availability.</p>
+
         <div class="buttons">
-            <a href="/add" class="btn"> Add Seed</a>
-            <a href="/report" class="btn btn-secondary"> View Inventory</a>
-            <a href="/status" class="btn btn-warning"> Status Overview</a>
+            {% if session.get('logged_in') %}
+                <a href="/add" class="btn">➕ Add Seed</a>
+            {% endif %}
+            <a href="/report" class="btn btn-secondary">📊 View Inventory</a>
+            <a href="/status" class="btn btn-warning">🌾 Status Overview</a>
         </div>
     </div>
 </body>

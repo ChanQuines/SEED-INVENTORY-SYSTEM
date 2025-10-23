@@ -11,7 +11,11 @@ db = SQLAlchemy(app)
 
 class Seed(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+<<<<<<< HEAD
     seed_id = db.Column(db.String(10), unique=True, nullable=False)
+=======
+    seed_id = db.Column(db.String(10), unique=True, nullable=False)  
+>>>>>>> 35c203209fd42e1ba8ce00b0f65b7f15acf12637
     seed_name = db.Column(db.String(100), nullable=False)
     seed_type = db.Column(db.String(100), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
@@ -89,6 +93,10 @@ def update_seed(id):
 
     seed = Seed.query.get_or_404(id)
     if request.method == 'POST':
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 35c203209fd42e1ba8ce00b0f65b7f15acf12637
         seed.seed_type = request.form['seed_type']
         seed.quantity = int(request.form['quantity'])
         seed.supplier = request.form['supplier']

@@ -1,75 +1,92 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f3f6f4;
-    color: #333;
     margin: 0;
-    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+    text-align: center;
 }
 
 .navbar {
-    background-color: #2d6a4f;
-    color: white;
-    padding: 15px 30px;
+    background-color: #2e7d32;
+    padding: 1em 2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: white;
+}
+
+.logo {
+    font-size: 1.3em;
+    font-weight: bold;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 25px;
+    gap: 1.2em;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .nav-links a:hover {
-    color: #b7e4c7;
+    text-decoration: underline;
 }
 
 .container {
-    width: 80%;
-    margin: 50px auto;
-    text-align: center;
+    margin-top: 100px;
 }
 
-@media (max-width: 768px) {
-    .container { width: 95%; margin: 20px auto; }
-    .nav-links { flex-direction: column; gap: 15px; }
+.highlight {
+    color: #388e3c;
+    font-weight: 600;
 }
 
-.btn, .btn-small {
-    text-decoration: none;
-    background-color: #40916c;
+.subtitle {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 2em;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background-color: #2e7d32;
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    display: inline-block;
-    cursor: pointer;
+    padding: 0.8em 1.6em;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
 }
 
-.btn:hover, .btn-small:hover {
-    background-color: #52b788;
+.btn:hover {
+    background-color: #1b5e20;
 }
 
-.delete { background-color: #d62828; }
-
-.btn-warning { background-color: #f4a261; }
-.btn-warning:hover { background-color: #e76f51; }
-
-.table-responsive { overflow-x: auto; }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.btn-secondary {
+    background-color: #388e3c;
 }
-th, td { padding: 10px; border: 1px solid #ddd; }
-th { background: #2d6a4f; color: white; }
 
-.status-available { color: green; font-weight: bold; }
-.status-low { color: orange; font-weight: bold; }
-.status-expired { color: red; font-weight: bold; }
+.btn-warning {
+    background-color: #fbc02d;
+    color: black;
+}
+
+.logout {
+    color: #ffeb3b !important;
+    font-weight: bold;
+}
+
+.login {
+    color: #c8e6c9 !important;
+}

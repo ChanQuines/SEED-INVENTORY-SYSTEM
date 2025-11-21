@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Add Seed{% endblock %}
+{% block content %}
+
+<div class="card mx-auto p-4" style="max-width: 600px;">
+  <h4 class="text-center mb-3">🌱 Add New Seed</h4>
+  <form method="POST">
+    <div class="mb-3">
+      <label class="form-label">Seed Name</label>
+      <input type="text" class="form-control" name="seed_name" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Seed Type</label>
+      <input type="text" class="form-control" name="seed_type" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Quantity</label>
+      <input type="number" class="form-control" name="quantity" min="1" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Supplier</label>
+      <input type="text" class="form-control" name="supplier" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" name="status" required>
+        <option value="Available">Available</option>
+        <option value="Low Stock">Low Stock</option>
+        <option value="Expired">Expired</option>
+      </select>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-success px-4">Add Seed</button>
+      <a href="{{ url_for('report') }}" class="btn btn-secondary px-4">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

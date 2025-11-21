@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}User Management{% endblock %}
+
+{% block content %}
+<div class="container-content">
+    <h1 class="page-title" style="text-align: center;">👥 User Management</h1>
+    <p class="page-subtitle" style="text-align: center;">Create and manage all system users and their access roles.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2.5rem; max-width: 1300px; margin: 0 auto;" class="responsive-grid">
+
+        <div class="card" style="padding: 2rem; box-shadow: var(--shadow-subtle);">
+            <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--color-text); margin-bottom: 1.5rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.75rem;">Create New User</h2>
+            <form method="POST" action="{{ url_for('user_management') }}" class="space-y-4">
+                <input type="hidden" name="action" value="add">
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role">
+                        <option value="Staff">Staff</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    Create User
+                </button>
+            </form>
+        </div>
+
+        <div class="card" style="padding: 0; overflow: hidden; box-shadow: var(--shadow-subtle);">
+            <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--color-text); padding: 1.5rem; border-bottom: 2px solid var(--color-border);">Existing Users</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th class="align-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            <span class="status-tag
+                                {% if user.role == 'Admin' %}status-pending{% else %}status-available{% endif %}">
+                                {{ user.role }}
+                            </span>
+                        </td>
+                        <td class="align-center">
+                            {% if user.role != 'Admin' %}
+                            <form method="POST" action="{{ url_for('user_management') }}" onsubmit="return confirm('Are you sure you want to delete user {{ user.username }}?');" style="display: inline-block;">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                <button type="submit" class="btn btn-secondary-sm" style="color: var(--color-danger-dark); background-color: #FEEEEE;">
+                                    Delete
+                                </button>
+                            </form>
+                            {% else %}
+                                <span style="color: var(--color-secondary-text);">Cannot Delete Admin</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Adjustments for responsive grid layout */
+@media (max-width: 1024px) {
+    .responsive-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+</style>
+{% endblock %}

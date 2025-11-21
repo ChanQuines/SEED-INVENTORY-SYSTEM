@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seeds Life Inventory - {% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Keep essential variables here for HTML context */
+            --color-primary-green: #388E3C;
+            --color-primary-blue: #1976D2;
+            --color-success: #388E3C;
+            --color-success-light: #E8F5E9;
+            --color-danger: #D32F2F;
+            --color-danger-dark: #B02828;
+            --color-danger-light: #FFCDD2;
+            --color-warning: #FFA000;
+            --color-warning-light: #FFECB3;
+            --color-info: #03A9F4;
+            --color-info-light: #E1F5FE;
+            --color-border-light: #E0E0E0;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+            --border-radius-element: 0.75rem;
+        }
+
+        /* Flash Message Styles */
+        .flash-message {
+            padding: 1.25rem;
+            border-radius: var(--border-radius-element);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            border: 2px solid;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .flash-success { background-color: var(--color-success-light); color: var(--color-success); border-color: #A3D8B4; }
+        .flash-danger { background-color: var(--color-danger-light); color: var(--color-danger-dark); border-color: #E0A9A9; }
+        .flash-warning { background-color: var(--color-warning-light); color: var(--color-warning); border-color: #FFDDAA; }
+        .flash-info { background-color: var(--color-info-light); color: var(--color-primary-blue); border-color: #B3D8F5; }
+
+        /* Active Navigation Style */
+        .nav-links a.active {
+            background-color: var(--color-success-light);
+            color: var(--color-success);
+            font-weight: 700;
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            Seeds Life Inventory
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="{{ url_for('report') }}" class="nav-link">Inventory Report</a></li>
+
+            {% if 'user_id' in session %}
+                <li><a href="{{ url_for('status_overview') }}" class="nav-link">Operational Dashboard</a></li>
+
+                {% if session.get('role') == 'Staff' %}
+                    <li><a href="{{ url_for('submit_request') }}" class="nav-link">Submit Request</a></li>
+                    <li><a href="{{ url_for('staff_transactions') }}" class="nav-link">My Transaction History</a></li>
+                {% elif session.get('role') == 'Admin' %}
+                    <li>
+                        <a href="{{ url_for('staff_transactions') }}" class="nav-link pending-link-style">
+                            Approval Queue
+                            {% if pending_approvals_count > 0 %}
+                                <span class="pending-count-badge">{{ pending_approvals_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li><a href="{{ url_for('user_management') }}" class="nav-link">User Management</a></li>
+                    <li><a href="{{ url_for('admin_archive') }}" class="nav-link">Transaction Archive</a></li>
+                {% endif %}
+
+                <li><a href="{{ url_for('logout') }}" class="btn btn-danger-sm">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}" class="btn btn-primary">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}" role="alert">
+                            {% if category == 'success' %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            {% elif category == 'danger' %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                            {% elif category == 'warning' %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            {% else %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            {% endif %}
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        © {{ current_year }} Seeds Life Inventory Manager. Cultivating data for efficient growth.
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const linkPath = link.getAttribute('href');
+                if (linkPath && currentPath.startsWith(linkPath) && linkPath !== '/') {
+                    link.classList.add('active');
+                }
+                // Special handling for the root path (Inventory Report)
+                if (currentPath === linkPath && linkPath === '{{ url_for("report") }}') {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

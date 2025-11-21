@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Direct Add{% endblock %}
+
+{% block content %}
+<div class="card max-w-2xl mx-auto">
+    <h1 class="page-title">➕ Direct Inventory Addition</h1>
+    <p class="page-subtitle">Instantly add new seeds or quantities to the main inventory. This action bypasses the staff request queue.</p>
+
+    <form method="POST" action="{{ url_for('add_seed_direct') }}">
+        <div class="form-row-2">
+            <div class="form-group">
+                <label for="seed_name">Seed Name (Required)</label>
+                <input type="text" id="seed_name" name="seed_name" required
+                       placeholder="e.g., California Poppy">
+            </div>
+
+            <div class="form-group">
+                <label for="seed_type">Seed Type</label>
+                <input type="text" id="seed_type" name="seed_type"
+                       placeholder="e.g., Flower, Vegetable, Grain">
+            </div>
+        </div>
+
+        <div class="form-row-2">
+            <div class="form-group">
+                <label for="quantity">Quantity to Add (Units)</label>
+                <input type="number" id="quantity" name="quantity" required min="1" value="1"
+                       placeholder="Minimum 1 unit">
+            </div>
+
+            <div class="form-group">
+                <label for="supplier">Supplier / Source</label>
+                <input type="text" id="supplier" name="supplier"
+                       placeholder="e.g., USDA Collection 1A">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Initial Status</label>
+            <select id="status" name="status" required>
+                <option value="Available">Available</option>
+                <option value="Low Stock">Low Stock</option>
+                <option value="Out of Stock">Out of Stock</option>
+                <option value="Expired">Expired</option>
+            </select>
+        </div>
+
+        <div class="form-group mt-10">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Direct Inventory Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

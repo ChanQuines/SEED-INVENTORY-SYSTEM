@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Inventory Report{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="page-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/><path d="M22 12h-4"/><path d="M22 17h-4"/><path d="M22 22h-4"/></svg>
+        Current Inventory Report
+    </div>
+    <div class="page-subtitle">
+        A comprehensive overview of all seed varieties currently held in stock.
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Seed ID</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Supplier</th>
+                <th class="align-right">Quantity (Units)</th> 
+                <th class="align-center">Stock Status</th> 
+                <th>Date Added</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for seed in seeds %}
+            <tr>
+                <td>{{ seed.seed_id }}</td>
+                <td>{{ seed.seed_name }}</td>
+                <td>{{ seed.seed_type }}</td>
+                <td>{{ seed.supplier }}</td>
+                <td class="align-right">{{ seed.quantity }}</td> 
+                <td class="align-center">
+                    <span class="status-tag status-{{ seed.status | lower | replace(' ', '-') }}">{{ seed.status }}</span>
+                </td>
+                <td>{{ seed.date_added.strftime('%Y-%m-%d') }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="align-center">No seed inventory records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

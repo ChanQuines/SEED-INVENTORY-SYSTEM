@@ -1,0 +1,462 @@
+/* ------------------------------------------------------------------------- */
+/* BASE & TYPOGRAPHY - ORGANIC MODERNISM THEME */
+/* ------------------------------------------------------------------------- */
+
+/* Google Fonts - Poppins (headings), Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+
+:root {
+    /* Color Palette - SeedsLife Theme: Earthy Greens, Deep Blues, Warm Accents */
+    --color-primary-green: #388E3C; /* Dominant vibrant green (Growth, Life) */
+    --color-primary-green-light: #4CAF50; /* Lighter shade of primary green */
+    --color-primary-blue: #1976D2; /* Deep Blue (Precision, Structure) */
+    --color-primary-blue-light: #2196F3; /* Lighter shade of primary blue */
+    --color-accent-orange: #FF9800; /* Warm Accent (Harvest, Energy) */
+    --color-background: #F8FBF8; /* Very light, subtle green-tinted background */
+    --color-surface: #FFFFFF;
+    --color-text-dark: #263238; /* Darker text for better contrast */
+    --color-text-medium: #546E7A; /* Medium gray for secondary text */
+    --color-text-light: #90A4AE; /* Light gray for subtle hints */
+    --color-danger: #D32F2F; /* Red for alerts */
+    --color-danger-dark: #B02828;
+    --color-danger-light: #FFCDD2;
+    --color-success: #388E3C; /* Match primary green */
+    --color-success-light: #E8F5E9;
+    --color-info: #03A9F4; /* Light blue for info */
+    --color-info-light: #E1F5FE;
+    --color-warning: #FFA000; /* Amber for warnings */
+    --color-warning-light: #FFECB3;
+
+    --color-border-light: #E0E0E0; /* Subtle border */
+    --color-border-medium: #B0BEC5; /* Medium border for stronger separation */
+
+    /* Organic Shadows for Depth and Lift */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.18);
+
+    /* Rounded Corners for Organic Feel */
+    --border-radius-card: 1.25rem; /* Larger, softer card corners */
+    --border-radius-element: 0.75rem; /* Medium rounded corners for inputs, buttons */
+    --border-radius-pill: 9999px; /* For status tags */
+
+    /* Font Sizes (Increased for Readability and Presence) */
+    font-size: 17px;
+    --font-size-base: 1rem;
+    --font-size-sm: 0.9rem;
+    --font-size-lg: 1.1rem;
+    --font-size-xl: 1.5rem;
+    --font-size-h1: 2.8rem;
+    --font-size-h2: 2.2rem;
+    --font-size-h3: 1.8rem;
+
+    /* Spacing for Connectivity and Harmony (8pt grid system) */
+    --spacing-xs: 0.5rem; /* 8px */
+    --spacing-sm: 1rem;   /* 16px */
+    --spacing-md: 1.5rem; /* 24px */
+    --spacing-lg: 2.5rem; /* 40px */
+    --spacing-xl: 3.5rem; /* 56px */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    line-height: 1.7; /* Slightly more spacious line height */
+    margin-top: 80px; /* Adjust for new navbar height */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-text-dark);
+    margin-top: 0;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.2;
+}
+h1 { font-size: var(--font-size-h1); font-weight: 800; }
+h2 { font-size: var(--font-size-h2); font-weight: 700; }
+h3 { font-size: var(--font-size-h3); font-weight: 600; }
+
+a {
+    color: var(--color-primary-blue);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+a:hover {
+    color: var(--color-primary-blue-light);
+}
+
+/* ------------------------------------------------------------------------- */
+/* NAVIGATION & HEADER ALIGNMENT */
+/* ------------------------------------------------------------------------- */
+.navbar {
+    background: linear-gradient(to right, #ffffff, #f7fff7);
+    border-bottom: 1px solid var(--color-border-light);
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Vertical alignment */
+    padding: 0 var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--color-primary-green);
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.8px;
+}
+.logo svg {
+    color: var(--color-primary-green-light);
+    margin-right: var(--spacing-xs);
+    width: 38px;
+    height: 38px;
+    transform: rotate(-15deg);
+    transition: transform 0.3s ease-in-out;
+}
+.logo:hover svg {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: var(--spacing-xs);
+}
+
+.nav-links a {
+    color: var(--color-text-medium);
+    text-decoration: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--border-radius-element);
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    font-weight: 600;
+    font-size: var(--font-size-base);
+}
+
+.nav-links a:hover {
+    background-color: var(--color-success-light);
+    color: var(--color-primary-green);
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-links a.active {
+    background-color: var(--color-success-light);
+    color: var(--color-primary-green);
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Pending Approvals Link - Distinct Alert Style */
+.pending-link-style {
+    color: var(--color-danger) !important;
+    background-color: var(--color-danger-light) !important;
+    box-shadow: 0 0 0 2px var(--color-danger);
+    position: relative;
+    padding-right: 2.5rem;
+}
+.pending-link-style:hover {
+    background-color: #FFC0CB !important;
+    color: var(--color-danger-dark) !important;
+    transform: translateY(-1px);
+}
+.pending-count-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--color-danger);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--border-radius-pill);
+    min-width: 20px;
+    text-align: center;
+    line-height: 1;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid white;
+}
+
+.container {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-grow: 1;
+}
+
+.card {
+    background-color: var(--color-surface);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-card);
+    border: 1px solid var(--color-border-light);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.page-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--font-size-h1);
+    font-weight: 800;
+    color: var(--color-primary-green);
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: -1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.page-title svg {
+    color: var(--color-accent-orange);
+    margin-right: var(--spacing-md);
+    width: 44px;
+    height: 44px;
+}
+
+.page-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-medium);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 500;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Flash Messages - Themed and prominent */
+.flash-container { margin-bottom: var(--spacing-xl); }
+.flash-message {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-element);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    border: 2px solid;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-lg);
+}
+.flash-message svg {
+    width: 24px; height: 24px;
+}
+.flash-success { background-color: var(--color-success-light); color: var(--color-success); border-color: #A3D8B4; }
+.flash-danger { background-color: var(--color-danger-light); color: var(--color-danger-dark); border-color: #E0A9A9; }
+.flash-warning { background-color: var(--color-warning-light); color: var(--color-warning); border-color: #FFDDAA; }
+.flash-info { background-color: var(--color-info-light); color: var(--color-info); border-color: #B3D8F5; }
+
+footer {
+    padding: var(--spacing-lg) 0;
+    color: var(--color-text-light);
+    border-top: 1px solid var(--color-border-light);
+    margin-top: auto;
+    text-align: center;
+    font-size: var(--font-size-sm);
+}
+
+/* ------------------------------------------------------------------------- */
+/* FORM ALIGNMENT (LABELS & INPUTS) */
+/* ------------------------------------------------------------------------- */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    color: var(--color-text-dark);
+    font-size: var(--font-size-base);
+}
+
+input[type="text"], input[type="password"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 0.9rem 1.25rem;
+    border: 1px solid var(--color-border-medium);
+    border-radius: var(--border-radius-element);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--color-primary-green);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.2);
+}
+
+/* Button Styling */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    border: none;
+    border-radius: var(--border-radius-element);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.15s, box-shadow 0.3s, opacity 0.3s;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    font-size: 1.05rem;
+    box-shadow: var(--shadow-sm);
+}
+.btn-primary {
+    background: linear-gradient(to right, var(--color-primary-green-light), var(--color-primary-green));
+    color: white;
+}
+.btn-primary:hover {
+    background: var(--color-primary-green);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(56, 142, 60, 0.4);
+}
+.btn-danger-sm {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.95rem;
+    background-color: var(--color-danger);
+    color: white;
+}
+.btn-secondary {
+    background-color: var(--color-border-light);
+    color: var(--color-text-dark);
+}
+
+.btn-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+/* ------------------------------------------------------------------------- */
+/* DATA TABLE ALIGNMENT (CRITICAL FIXES) */
+/* ------------------------------------------------------------------------- */
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: var(--font-size-base);
+    border-radius: var(--border-radius-element);
+    overflow: hidden;
+}
+
+.data-table th, .data-table td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+    vertical-align: middle;
+}
+
+.data-table thead th {
+    background-color: var(--color-background);
+    color: var(--color-text-medium);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: var(--font-size-sm);
+    border-bottom: 2px solid var(--color-border-medium);
+}
+
+/* Specific Alignment Classes for Columns and Rows */
+.data-table .align-center {
+    text-align: center;
+}
+.data-table .align-right {
+    text-align: right;
+    font-weight: 600;
+}
+
+/* Ensure Status Tags are centered within the cell */
+.data-table td:has(.status-tag) {
+    text-align: center;
+}
+
+/* Status Tag Styling - Themed colors */
+.status-tag {
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--border-radius-pill);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.status-available { background-color: var(--color-success-light); color: var(--color-success); }
+.status-low-stock { background-color: var(--color-warning-light); color: var(--color-warning); border: 1px solid #FFDDAA; }
+.status-out-of-stock { background-color: var(--color-danger-light); color: var(--color-danger); }
+.status-pending { background-color: var(--color-info-light); color: var(--color-primary-blue); }
+.status-approved { background-color: var(--color-success-light); color: var(--color-success); }
+.status-denied { background-color: var(--color-danger-light); color: var(--color-danger); }
+
+/* ------------------------------------------------------------------------- */
+/* DASHBOARD GRID ALIGNMENT */
+/* ------------------------------------------------------------------------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+}
+
+.metric-tile {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.metric-tile:last-child {
+    border-bottom: none;
+}
+.metric-value {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.metric-tile strong {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: var(--color-primary-green);
+}
+
+/* Login Card Centering */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: -80px;
+}
+
+.login-form-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 3.5rem;
+    box-shadow: var(--shadow-deep);
+    border-radius: var(--border-radius-card);
+}

@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Operational Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-title">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8.3c-.6-.6-1.4-.9-2.3-.9s-1.7.3-2.3.9L8 16.2 3 21"/><path d="M16 8l3 3 3-3"/></svg>
+    Operational Dashboard
+</div>
+<div class="page-subtitle">
+    Key performance indicators and recent activity summary for immediate operational oversight.
+</div>
+
+<div class="dashboard-grid">
+
+    <div>
+        {% if user_role == 'Admin' %}
+        <div class="dashboard-summary-card" style="margin-bottom: var(--spacing-lg);">
+            <h3>Pending Approvals ({{ pending_count }})</h3>
+            {% if pending_transactions %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>User</th>
+                            <th>Type</th>
+                            <th>Seed Name</th>
+                            <th class="align-right">Qty</th>
+                            <th class="align-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in pending_transactions %}
+                        <tr>
+                            <td>{{ t.created_at.strftime('%H:%M') }}</td>
+                            <td>{{ t.user.username }}</td>
+                            <td><span class="status-tag status-pending">{{ t.transaction_type }}</span></td>
+                            <td>{{ t.seed_name }}</td>
+                            <td class="align-right">{{ t.quantity }}</td>
+                            <td class="align-center btn-container">
+                                <a href="{{ url_for('approve_transaction', transaction_id=t.id) }}" class="btn btn-primary btn-secondary-sm">Approve</a>
+                                <a href="{{ url_for('deny_transaction', transaction_id=t.id) }}" class="btn btn-danger-sm">Deny</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="align-center" style="color: var(--color-text-medium);">No pending transactions awaiting approval.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="dashboard-summary-card">
+            <h3>Recent Activity (Approved/Denied)</h3>
+            {% if recent_activity %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>User</th>
+                            <th class="align-center">Status</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in recent_activity %}
+                        <tr>
+                            <td>{{ t.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ t.user.username }}</td>
+                            <td class="align-center">
+                                <span class="status-tag status-{{ t.status | lower }}">{{ t.status }}</span>
+                            </td>
+                            <td>{{ t.transaction_type }} {{ t.quantity }} units of {{ t.seed_name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="align-center" style="color: var(--color-text-medium);">No recent approved or denied activity.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="dashboard-summary-card">
+        <h3>Key Inventory Metrics</h3>
+        <div class="metric-tile">
+            <span>Total Units in Stock</span>
+            <div class="metric-value">
+                <strong>{{ "{:,.0f}".format(total_quantity) }}</strong>
+                <span>Units</span>
+            </div>
+        </div>
+        <div class="metric-tile">
+            <span>Total Seed Varieties</span>
+            <div class="metric-value">
+                <strong>{{ total_seeds_in_inventory }}</strong>
+                <span>Varieties</span>
+            </div>
+        </div>
+        <div class="metric-tile">
+            <span style="color: var(--color-danger);">Varieties in Low Stock</span>
+            <div class="metric-value">
+                <strong style="color: var(--color-danger);">{{ low_stock_count }}</strong>
+                <span>Count</span>
+            </div>
+        </div>
+        {% if user_role == 'Admin' %}
+        <div class="metric-tile">
+            <span style="color: var(--color-primary-blue);">Pending Approval Count</span>
+            <div class="metric-value">
+                <strong style="color: var(--color-primary-blue);">{{ pending_count }}</strong>
+                <span>Requests</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

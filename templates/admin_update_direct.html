@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Update Seed: {{ seed.seed_name }}{% endblock %}
+
+{% block content %}
+<div class="card max-w-2xl mx-auto">
+    <h1 class="page-title">⚙️ Admin Direct Inventory Update</h1>
+    <p class="page-subtitle">
+        Seed ID: <span style="font-family: monospace; font-weight: 600; color: var(--color-primary);">{{ seed.id }}</span> - Directly modifying inventory data.
+    </p>
+
+    <form method="POST" action="{{ url_for('update_seed_direct', id=seed.id) }}" class="space-y-5">
+
+        <div class="form-row-2">
+            <div class="form-group">
+                <label for="seed_name">Seed Name</label>
+                <input type="text" id="seed_name" name="seed_name" value="{{ seed.seed_name }}" required
+                       placeholder="e.g., Roma Tomato">
+            </div>
+            <div class="form-group">
+                <label for="seed_type">Seed Type / Category</label>
+                <input type="text" id="seed_type" name="seed_type" value="{{ seed.seed_type }}" required
+                       placeholder="e.g., Vegetable, Herb, Flower">
+            </div>
+        </div>
+
+        <div class="form-row-2">
+            <div class="form-group">
+                <label for="quantity">Quantity (in packs/grams)</label>
+                <input type="number" id="quantity" name="quantity" value="{{ seed.quantity }}" required min="0"
+                       placeholder="Quantity">
+            </div>
+            <div class="form-group">
+                <label for="supplier">Supplier</label>
+                <input type="text" id="supplier" name="supplier" value="{{ seed.supplier }}" required
+                       placeholder="Supplier Name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Stock Status</label>
+            <select id="status" name="status" required>
+                {% set statuses = ['Available', 'Low Stock', 'Expired', 'Out of Stock'] %}
+                {% for s in statuses %}
+                    <option value="{{ s }}" {% if s == seed.status %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group mt-10" style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; display: flex; justify-content: space-between;">
+            <button type="submit" class="btn btn-primary">
+                <span style="margin-right: 0.5rem;">💾</span> Execute Direct Update
+            </button>
+
+            <a href="{{ url_for('delete_seed_direct', id=seed.id) }}"
+               onclick="return confirm('WARNING: Are you sure you want to PERMANENTLY delete {{ seed.seed_name }} (ID: {{ seed.id }})? This action cannot be undone.');"
+               class="btn btn-secondary-sm" style="background-color: var(--color-danger); color: white; border: none; font-weight: 700;">
+               Delete Item
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

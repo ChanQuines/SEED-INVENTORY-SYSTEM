@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Status Overview{% endblock %}
+
+{% block content %}
+<div class="space-y-10">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">
+        📊 Seed Status Overview
+    </h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Available Card -->
+        <div class="bg-white p-6 rounded-xl shadow-2xl border-l-4 border-[#2e7d32] transition duration-300 hover:shadow-3xl">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-[#c8e6c9] text-[#2e7d32] mr-4">
+                    <!-- Icon for Available -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Available Stock</p>
+                    <p class="text-3xl font-bold text-gray-900">{{ available_count }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Low Stock Card -->
+        <div class="bg-white p-6 rounded-xl shadow-2xl border-l-4 border-yellow-500 transition duration-300 hover:shadow-3xl">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
+                    <!-- Icon for Low Stock -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856a2 2 0 001.789-3.006L12 5.004 5.211 17.994A2 2 0 007.062 21z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Low Stock Warning</p>
+                    <p class="text-3xl font-bold text-gray-900">{{ low_stock_count }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Out of Stock Card -->
+        <div class="bg-white p-6 rounded-xl shadow-2xl border-l-4 border-gray-400 transition duration-300 hover:shadow-3xl">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-gray-100 text-gray-600 mr-4">
+                    <!-- Icon for Out of Stock -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Out of Stock</p>
+                    <p class="text-3xl font-bold text-gray-900">{{ out_of_stock_count }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expired Card -->
+        <div class="bg-white p-6 rounded-xl shadow-2xl border-l-4 border-red-500 transition duration-300 hover:shadow-3xl">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-red-100 text-red-600 mr-4">
+                    <!-- Icon for Expired -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-500">Expired Items</p>
+                    <p class="text-3xl font-bold text-gray-900">{{ expired_count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if user_role == 'Staff' %}
+    <div class="text-center mt-12 p-6 bg-blue-50 border border-blue-200 rounded-xl max-w-2xl mx-auto">
+        <p class="text-lg font-medium text-blue-700">Need to update inventory?</p>
+        <p class="text-gray-600 mt-2">Submit a request for an Admin to review and approve your changes.</p>
+        <a href="{{ url_for('submit_request') }}"
+           class="mt-4 inline-block py-2 px-6 rounded-lg shadow-lg text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition duration-200">
+            Submit New Request
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

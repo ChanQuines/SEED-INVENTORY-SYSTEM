@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}My Transaction History{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="page-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+        My Transaction History
+    </div>
+    <div class="page-subtitle">
+        Review the status of your submitted Add/Withdraw requests.
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Created At</th>
+                <th>Type</th>
+                <th>Seed Name</th>
+                <th>Seed Type</th>
+                <th class="align-right">Quantity</th>
+                <th>Reason</th>
+                <th class="align-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transactions %}
+            <tr>
+                <td>{{ t.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ t.transaction_type }}</td>
+                <td>{{ t.seed_name }}</td>
+                <td>{{ t.seed_type }}</td>
+                <td class="align-right">{{ t.quantity }}</td>
+                <td>{{ t.reason or '-' }}</td>
+                <td class="align-center">
+                    <span class="status-tag status-{{ t.status | lower }}">{{ t.status }}</span>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="align-center">You have not submitted any transactions yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

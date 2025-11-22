@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robust System Monitor</title>
     <!-- Load Tailwind CSS -->
@@ -301,40 +300,3 @@
     </script>
 </body>
 </html>
-=======
-    <title>Seed Inventory System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="logo">🌱 Seed Inventory</div>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            {% if session.get('logged_in') %}
-                <li><a href="/add">Add Seed</a></li>
-            {% endif %}
-            <li><a href="/report">Reports</a></li>
-            <li><a href="/status">Status</a></li>
-            {% if session.get('logged_in') %}
-                <li><a href="/logout" class="logout">Logout</a></li>
-            {% else %}
-                <li><a href="/login" class="login">Login</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-
-    <div class="container">
-        <h1>Welcome to the <span class="highlight">Seed Inventory System</span></h1>
-        <p class="subtitle">Efficiently track your seeds — manage stock, suppliers, and availability.</p>
-
-        <div class="buttons">
-            {% if session.get('logged_in') %}
-                <a href="/add" class="btn">➕ Add Seed</a>
-            {% endif %}
-            <a href="/report" class="btn btn-secondary">📊 View Inventory</a>
-            <a href="/status" class="btn btn-warning">🌾 Status Overview</a>
-        </div>
-    </div>
-</body>
-</html>
->>>>>>> 530cbcbc9bcbc36ebf93a5fe70d452fa31271e45
